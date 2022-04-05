@@ -10,7 +10,11 @@
         $this->lenght = $lenght;
     }
     function create(){
-        echo "Cadastrar no banco: ".$this->name;
+        $input = file_get_contents('php://input');
+        echo $input.lenght();
+        $input = json_decode($input, true);
+        print_r($input);
+        echo 'teste';
     }
     function delete(){
         echo "Delete no banco".$this->id;

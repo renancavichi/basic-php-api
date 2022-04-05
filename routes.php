@@ -16,6 +16,10 @@ if($route[0] == 'user'){
 } elseif($route[0] == 'product'){
     require('controllers/ProductController.php');
 } else {
-    echo "404 - Página não encontrada";
+    header("HTTP/1.1 404 Not Found");
+    header('Content-Type: application/json; charset=utf-8');
+    $result["message"] =  "404 - Página não econtrada";
+    echo json_encode($result);
+    die;
 }
 ?>
