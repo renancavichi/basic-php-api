@@ -7,9 +7,13 @@
             $product = new Product(10, 'Renan','','');
             $product->delete();
         }else{
-            echo "Página não econtrada";
+            $result['message'] = "404 - Rota Api Não Encontrada";
+            $response = new Output();
+            $response->out($result, 404);
         }
     }else{
-        echo "Página não econtrada";
+        $result['message'] = "404 - Rota Api Não Encontrada";
+        $response = new Output();
+        $response->out($result, 404);
     }
 ?>

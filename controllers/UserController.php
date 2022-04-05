@@ -21,17 +21,13 @@
             $user = new User(null, null, null, null);
             $user->selectAll();
         } else {
-            header("HTTP/1.1 404 Not Found");
-            header('Content-Type: application/json; charset=utf-8');
-            $result["message"] =  "404 - Página não econtrada";
-            echo json_encode($result);
-            die;
+            $result['message'] = "404 - Rota Api Não Encontrada";
+            $response = new Output();
+            $response->out($result, 404);
         }
     }else{
-        header("HTTP/1.1 404 Not Found");
-        header('Content-Type: application/json; charset=utf-8');
-        $result["message"] =  "404 - Página não econtrada";
-        echo json_encode($result);
-        die;
+        $result['message'] = "404 - Rota Api Não Encontrada";
+        $response = new Output();
+        $response->out($result, 404);
     }
 ?>

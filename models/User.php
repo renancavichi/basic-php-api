@@ -1,5 +1,4 @@
 <?php 
-require ('helpers/database.php');
 class User{
     public $id;
     public $name;
@@ -20,9 +19,19 @@ class User{
             $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':pass', $this->pass);
             $stmt->execute();
-            echo 'Cadastrado com sucesso!';
+            $id = $db->conn->lastInsertId();
+
+            $result['message'] = "Cadastrado com sucesso!";
+            $result['user']['id'] = $id;
+            $result['user']['name'] = $this->name;
+            $result['user']['email'] = $this->email;
+            $result['user']['pass'] = $this->pass;
+            $response = new Output();
+            $response->out($result);
         }catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }
     }
     function delete(){
@@ -31,9 +40,14 @@ class User{
             $stmt = $db->conn->prepare("DELETE FROM users WHERE id = :id;");
             $stmt->bindParam(':id', $this->id);
             $stmt->execute();
-            echo 'Deletado com sucesso!';
+            $result['message'] = "User deletado com sucesso!";
+            $result['user']['id'] = $this->id;
+            $response = new Output();
+            $response->out($result);
         }catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }
     }
     function update(){
@@ -45,9 +59,17 @@ class User{
             $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':pass', $this->pass);
             $stmt->execute();
-            echo 'User atualizado com sucesso!';
+            $result['message'] = "User atualizado com sucesso!";
+            $result['user']['id'] = $this->id;
+            $result['user']['name'] = $this->name;
+            $result['user']['email'] = $this->email;
+            $result['user']['pass'] = $this->pass;
+            $response = new Output();
+            $response->out($result);
         }catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }
     }
     function selectAll(){
@@ -57,11 +79,13 @@ class User{
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            header('Content-Type: application/json; charset=utf-8');
-            echo json_encode($result);
-            die;
+            $response = new Output();
+            //$camelCase = lcfirst(join(array_map('ucfirst', explode('-', 'select-all-new'))));
+            $response->out($result);
         }catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }
     }
 }
