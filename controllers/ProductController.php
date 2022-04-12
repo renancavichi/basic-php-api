@@ -8,12 +8,10 @@
             $product->delete();
         }else{
             $result['message'] = "404 - Rota Api Não Encontrada";
-            $response = new Output();
             $response->out($result, 404);
         }
     }else{
         $result['message'] = "404 - Rota Api Não Encontrada";
-        $response = new Output();
         $response->out($result, 404);
     }
 ?>
