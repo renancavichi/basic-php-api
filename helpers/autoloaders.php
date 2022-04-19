@@ -1,13 +1,13 @@
 <?php
 function myLoaders($class_name){
-    if(file_exists('models/' . $class_name . '.php')){
-        require 'models/' . $class_name . '.php';
+    if(file_exists(MODELS_FOLDER . $class_name . '.php')){
+        require MODELS_FOLDER . $class_name . '.php';
     }
-    if(file_exists('helpers/' . $class_name . '.php')){
-        require 'helpers/' . $class_name . '.php';
+    if(file_exists(HELPERS_FOLDER . $class_name . '.php')){
+        require HELPERS_FOLDER . $class_name . '.php';
     }
-    if(file_exists('controllers/' . $class_name . '.php')){
-        require 'controllers/' . $class_name . '.php';
+    if(file_exists(CONTROLLERS_FOLDER . $class_name . '.php')){
+        require CONTROLLERS_FOLDER . $class_name . '.php';
     }
 }
 //automatiza o carregamento dos modelos

@@ -14,7 +14,7 @@ class User{
         $db = new Database();
         try {
             $stmt = $db->conn->prepare("INSERT INTO users (name, email, pass)
-            VALUES (:name, :email, :pass)");
+            VALUES (:name, :email, :pass);");
             $stmt->bindParam(':name', $this->name);
             $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':pass', $this->pass);
@@ -43,7 +43,7 @@ class User{
     function update(){
         $db = new Database();
         try {
-            $stmt = $db->conn->prepare("UPDATE users SET name = :name, email = :email, pass = :pass WHERE id = :id");
+            $stmt = $db->conn->prepare("UPDATE users SET name = :name, email = :email, pass = :pass WHERE id = :id;");
             $stmt->bindParam(':id', $this->id);
             $stmt->bindParam(':name', $this->name);
             $stmt->bindParam(':email', $this->email);
@@ -65,6 +65,21 @@ class User{
             return $result;
         }catch(PDOException $e) {
             $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
+        }
+    }
+
+    function selectById(){
+        $db = new Database();
+        try {
+            $stmt = $db->conn->prepare("SELECT * FROM users WHERE id = :id;");
+            $stmt->bindParam(':id', $this->id);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }catch(PDOException $e) {
+            $result['message'] = "Error Select By Id: " . $e->getMessage();
             $response = new Output();
             $response->out($result, 500);
         }
