@@ -20,7 +20,7 @@ class AuthController{
                 $result['session']['token'] = $token;
                 $result['session']['email'] = $userLogged['email'];
                 $result['session']['roles'] = $userLogged['roles'];
-                $response->out($result, 403);
+                $response->out($result);
             }
         }else{
             $result['message'] = "Usuário ou Senha Inválidos!";
@@ -37,8 +37,11 @@ class AuthController{
         $session = new Session(null, $token, null);
         
         if($session->delete()){
-            $result['message'] = "Admin deslogado! Volte sempre!";
+            $result['message'] = "Sessão encerrada! Volte sempre!";
             $response->out($result);
+        }else{
+            $result['message'] = "Sessão não encontrada!";
+            $response->out($result, 403);
         }
     }
 }

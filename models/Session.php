@@ -33,7 +33,7 @@ class Session{
             $stmt = $db->conn->prepare("DELETE FROM sessions WHERE token = :token;");
             $stmt->bindParam(':token', $this->token);
             $stmt->execute();
-            return true;
+            return $stmt->rowCount();
         }catch(PDOException $e) {
             $result['message'] = "Error Delete Session: " . $e->getMessage();
             $response = new Output();
@@ -41,16 +41,19 @@ class Session{
         }
     }
 
-    function selectByToken(){
+    function checkSessionRoles(){
         $db = new Database();
         try {
-            $stmt = $db->conn->prepare("SELECT id_user FROM sessions WHERE token = :token;");
+            $stmt = $db->conn->prepare("SELECT s.id_user, u.roles FROM
+            sessions as s
+            JOIN users as u ON s.id_user = u.id
+            WHERE s.token = :token;");
             $stmt->bindParam(':token', $this->token);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result;
         }catch(PDOException $e) {
-            $result['message'] = "Error Select Token: " . $e->getMessage();
+            $result['message'] = "Error Check Session Roles: " . $e->getMessage();
             $response = new Output();
             $response->out($result, 500);
         }

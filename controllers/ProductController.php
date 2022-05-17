@@ -1,28 +1,37 @@
 <?php
-class UserController{
+class ProductController{
 
     function create(){
         $response = new Output();
         $response->allowedMethod('POST');
+
+        $auth = new Auth();
+        $user_session = $auth->allowedRole('admin');
+
         //Entradas
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
+        $photo = $_POST['photo'];
+        $title = $_POST['title'];
+        $price = $_POST['price'];
 
         //Processamento ou Persistencia
-        $user = new User(null, $name, $email, sha1($pass));
-        $id = $user->create();
+        $product = new Product(null, $photo, $title, $price);
+        $id = $product->create();
         //Saída
-        $result['message'] = "Cadastrado com sucesso!";
-        $result['user']['id'] = $id;
-        $result['user']['name'] = $name;
-        $result['user']['email'] = $email;
+        $result['message'] = "Produto Cadastrado com sucesso!";
+        $result['product']['id'] = $id;
+        $result['product']['photo'] = $photo;
+        $result['product']['title'] = $title;
+        $result['product']['price'] = $price;
         $response->out($result);
     }
 
     function delete(){
         $response = new Output();
         $response->allowedMethod('POST');
+
+        $auth = new Auth();
+        $user_session = $auth->allowedRole('admin');
+
         $id = $_POST['id'];
         $user = new User($id, null, null, null);
         $user->delete();
@@ -34,6 +43,10 @@ class UserController{
     function update(){
         $response = new Output();
         $response->allowedMethod('POST');
+
+        $auth = new Auth();
+        $user_session = $auth->allowedRole('admin');
+
         $id = $_POST['id'];
         $name = $_POST['name'];
         $email = $_POST['email'];

@@ -33,9 +33,9 @@ class User{
             $stmt = $db->conn->prepare("DELETE FROM users WHERE id = :id;");
             $stmt->bindParam(':id', $this->id);
             $stmt->execute();
-            return true;
+            return $stmt->rowCount();
         }catch(PDOException $e) {
-            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $result['message'] = "Error Delete User: " . $e->getMessage();
             $response = new Output();
             $response->out($result, 500);
         }
@@ -51,7 +51,7 @@ class User{
             $stmt->execute();
             return true;
         }catch(PDOException $e) {
-            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $result['message'] = "Error Update User: " . $e->getMessage();
             $response = new Output();
             $response->out($result, 500);
         }
@@ -79,7 +79,7 @@ class User{
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result;
         }catch(PDOException $e) {
-            $result['message'] = "Error Select By Id: " . $e->getMessage();
+            $result['message'] = "Error Select User By Id: " . $e->getMessage();
             $response = new Output();
             $response->out($result, 500);
         }
