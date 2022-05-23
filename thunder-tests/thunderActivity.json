@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "449a4ccb-0f1d-4b98-a836-82aee712e068",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost/lp2/api/auth/login",
+    "url": "http://localhost/lp2/api/auth/login",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-05-23T17:37:18.304Z",
+    "modified": "2022-05-23T17:37:18.467Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "email",
+          "value": "renancavichi@gmail.com"
+        },
+        {
+          "name": "pass",
+          "value": "321321"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "b05e1537-f2b0-4528-8681-ad9c02019834",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost/lp2/api/user/select-all",
+    "url": "http://localhost/lp2/api/user/select-all",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-05-23T17:44:15.301Z",
+    "modified": "2022-05-23T17:44:15.465Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
