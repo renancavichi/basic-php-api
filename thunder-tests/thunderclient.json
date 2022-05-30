@@ -77,5 +77,37 @@
       ]
     },
     "tests": []
+  },
+  {
+    "_id": "94dce1fb-4e10-49a3-b6f9-08c76f1ec299",
+    "colId": "6695c181-9bb9-4a9a-9297-9ebf67df5d6e",
+    "containerId": "",
+    "name": "user/create",
+    "url": "http://localhost/lp2/api/user/create",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2022-05-30T18:17:45.786Z",
+    "modified": "2022-05-30T18:17:45.786Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "email",
+          "value": "renancavichi2@gmail.com"
+        },
+        {
+          "name": "pass",
+          "value": "321321"
+        },
+        {
+          "name": "name",
+          "value": "Renan 2"
+        }
+      ]
+    },
+    "tests": []
   }
 ]
